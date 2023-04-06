@@ -1,1 +1,49 @@
-none
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-flask
+  namespace: argocd
+  labels:
+    app: frontend-flask
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      name: frontend-flask-ports
+  selector:
+    app: frontend-flask
+    tier: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-flask-deployment
+  namespace: argocd
+  labels:
+    app: frontend-flask
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-flask
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend-flask
+        tier: frontend
+    spec: # Pod spec
+      containers:
+        - name: frontend--flask
+          image: northamerica-northeast1-docker.pkg.dev/rocketdoctor-stg/rd-rocketdoctor-respository/flask_test:1.0
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"    # 500milliCPUs (1/2 CPU)
+            limits:
+              memory: "250Mi"
+              cpu: "400m"
+
