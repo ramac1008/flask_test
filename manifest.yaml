@@ -1,4 +1,4 @@
-apiVersion: v1
+dckr_pat_AXL00j66tQxIhkKqRrCkmanLMyAapiVersion: v1
 kind: Service
 metadata:
   name: frontend-flask
@@ -36,14 +36,7 @@ spec:
     spec: # Pod spec
       containers:
         - name: frontend--flask
-          image: northamerica-northeast1-docker.pkg.dev/rocketdoctor-stg/rd-rocketdoctor-respository/flask_test:1.0
+          image: condorl/flask_test:1.0
           ports:
             - containerPort: 80
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "250m"    # 500milliCPUs (1/2 CPU)
-            limits:
-              memory: "250Mi"
-              cpu: "400m"
 
