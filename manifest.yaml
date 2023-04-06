@@ -1,4 +1,4 @@
-dckr_pat_AXL00j66tQxIhkKqRrCkmanLMyAapiVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
   name: frontend-flask
